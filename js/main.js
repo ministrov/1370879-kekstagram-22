@@ -3,18 +3,19 @@
 // Получение случайного целого числа в заданном интервале, включительно
 
 const getRandomInteger = function (min, max) {
-if (min < 0 || max < 0) {
-  return -1;
-}
+  if (min < 0 || max < 0) {
+    return -1;
+  }
 
-if (max < min) {
-  [min, max] = [max, min];
-}
+  if (max < min) {
+    [min, max] = [max, min];
+  }
 
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
- let integerUsing = getRandomInteger(3, 78);
+let integerUsing = getRandomInteger(3, 78);
+integerUsing;
 
 // Функция для проверки максимальной длины строки
 
@@ -23,3 +24,4 @@ const getMaxStringLength = function (text, sign) {
 }
 
 let maxLengthUsing = getMaxStringLength('Hello World', 10);
+maxLengthUsing;
