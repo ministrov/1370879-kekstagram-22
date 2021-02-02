@@ -14,8 +14,7 @@ const getRandomInteger = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-let integerUsing = getRandomInteger(3, 78);
-integerUsing;
+getRandomInteger(3, 78);
 
 // Функция для проверки максимальной длины строки
 
@@ -23,5 +22,4 @@ const getMaxStringLength = function (text, sign) {
   return text.length <= sign ? true : false;
 }
 
-let maxLengthUsing = getMaxStringLength('Hello World', 10);
-maxLengthUsing;
+getMaxStringLength('Hello World', 10);
