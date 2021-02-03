@@ -33,13 +33,13 @@ const AUTHOR_NAME = [
   'Андрей',
   'Егор',
   'Максим',
-  'Роман'
+  'Роман',
 ]
 const DESCRIPTION = [
   'Описание 1',
   'Описание 2',
   'Описание 3',
-  'Описание 4'
+  'Описание 4',
 ]
 const message = [
   'Всё отлично!',
@@ -47,7 +47,7 @@ const message = [
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
   'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
+  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ]
 
 const getAvatarLink = function () {
@@ -90,10 +90,12 @@ const getRandomObjectsArray = function () {
       id: i + 1,
       url: `photos/${i + 1}.jpg`,
       description: getRandomArrayEl(DESCRIPTION, 0, DESCRIPTION.length),
-      likes: getRandomInteger(15, 200),
-      comments: getRandomCommentsArray()
+      likes: LIKES,
+      comments: getRandomCommentsArray(),
     };
     objectsArray.push(newObject);
   }
   return objectsArray;
 }
+
+getRandomObjectsArray();
