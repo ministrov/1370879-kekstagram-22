@@ -1,29 +1,5 @@
 'use strict';
 
-// Получение случайного целого числа в заданном интервале, включительно
-
-const getRandomInteger = function (min, max) {
-  if (min < 0 || max < 0) {
-    return -1;
-  }
-
-  if (max < min) {
-    [min, max] = [max, min];
-  }
-
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-getRandomInteger(3, 78);
-
-// Функция для проверки максимальной длины строки
-
-const getMaxStringLength = function (text, sign) {
-  return text.length <= sign ? true : false;
-}
-
-getMaxStringLength('Hello World', 10);
-
 // Необходимо написать функцию для создания массива из 25 сгенерированных объектов.
 //  Каждый объект массива — описание фотографии, опубликованной пользователем.
 
@@ -49,6 +25,28 @@ const message = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ]
+
+// Получение случайного целого числа в заданном интервале, включительно
+
+const getRandomInteger = function (min, max) {
+  if (min < 0 || max < 0) {
+    return -1;
+  }
+
+  if (max < min) {
+    [min, max] = [max, min];
+  }
+
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Функция для проверки максимальной длины строки
+
+const getMaxStringLength = function (text, sign) {
+  return text.length <= sign ? true : false;
+}
+
+getMaxStringLength('Hello World', 10);
 
 const getAvatarLink = function () {
   return `img/avatar-${getRandomInteger(1, 6)}.svg`
