@@ -1,5 +1,31 @@
 'use strict';
 
+// Необходимо написать функцию для создания массива из 25 сгенерированных объектов.
+//  Каждый объект массива — описание фотографии, опубликованной пользователем.
+
+const SIMILAR_OBJECTS_QUANTITY = 25;
+const AUTHOR_NAME = [
+  'Артём',
+  'Андрей',
+  'Егор',
+  'Максим',
+  'Роман',
+]
+const DESCRIPTION = [
+  'Описание 1',
+  'Описание 2',
+  'Описание 3',
+  'Описание 4',
+]
+const MESSAGE = [
+  'Всё отлично!',
+  'В целом всё неплохо. Но не всё.',
+  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
+  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
+  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
+  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
+]
+
 // Получение случайного целого числа в заданном интервале, включительно
 
 const getRandomInteger = function (min, max) {
@@ -14,7 +40,7 @@ const getRandomInteger = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-getRandomInteger(3, 78);
+const LIKES = getRandomInteger(15, 200);
 
 // Функция для проверки максимальной длины строки
 
@@ -23,3 +49,52 @@ const getMaxStringLength = function (text, sign) {
 }
 
 getMaxStringLength('Hello World', 10);
+
+const getAvatarLink = function () {
+  return `img/avatar-${getRandomInteger(1, 6)}.svg`
+}
+// El - element
+const getRandomArrayEl = function (array, min, max) {
+  return array[getRandomInteger(min, max - 1)];
+}
+
+const usedId = [];
+
+const generateUniqId = function () {
+  const id = getRandomInteger(0, 1000);
+  if (!usedId.includes(id)) {
+    usedId.push(id);
+  }
+  return id;
+}
+const getRandomCommentsArray = function () {
+  const commentsArr = [];
+  const commentsCount = getRandomInteger(1, 10);
+  for (let i = 0; i < commentsCount; i++) {
+    const newComment = {
+      id: generateUniqId(),
+      avatar: getAvatarLink(),
+      message: getRandomArrayEl(MESSAGE, 0, 5),
+      name: getRandomArrayEl(AUTHOR_NAME, 0, 4),
+    };
+    commentsArr.push(newComment);
+  }
+  return commentsArr;
+}
+
+const getRandomObjectsArray = function () {
+  const objectsArray = [];
+  for (let i = 0; i < SIMILAR_OBJECTS_QUANTITY; i++) {
+    const newObject = {
+      id: i + 1,
+      url: `photos/${i + 1}.jpg`,
+      description: getRandomArrayEl(DESCRIPTION, 0, DESCRIPTION.length),
+      likes: LIKES,
+      comments: getRandomCommentsArray(),
+    };
+    objectsArray.push(newObject);
+  }
+  return objectsArray;
+}
+
+getRandomObjectsArray();
