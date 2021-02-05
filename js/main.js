@@ -3,7 +3,7 @@
 // Необходимо написать функцию для создания массива из 25 сгенерированных объектов.
 //  Каждый объект массива — описание фотографии, опубликованной пользователем.
 
-const LIKES = getRandomInteger(15, 200);
+const SIMILAR_OBJECTS_QUANTITY = 25;
 const AUTHOR_NAME = [
   'Артём',
   'Андрей',
@@ -17,7 +17,7 @@ const DESCRIPTION = [
   'Описание 3',
   'Описание 4',
 ]
-const message = [
+const MESSAGE = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -40,6 +40,8 @@ const getRandomInteger = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+const LIKES = getRandomInteger(15, 200);
+
 // Функция для проверки максимальной длины строки
 
 const getMaxStringLength = function (text, sign) {
@@ -53,8 +55,7 @@ const getAvatarLink = function () {
 }
 // El - element
 const getRandomArrayEl = function (array, min, max) {
-  const i = getRandomInteger(min, max - 1);
-  return array[i];
+  return array[getRandomInteger(min, max - 1)];
 }
 
 const usedId = [];
@@ -73,7 +74,7 @@ const getRandomCommentsArray = function () {
     const newComment = {
       id: generateUniqId(),
       avatar: getAvatarLink(),
-      message: getRandomArrayEl(message, 0, 5),
+      message: getRandomArrayEl(MESSAGE, 0, 5),
       name: getRandomArrayEl(AUTHOR_NAME, 0, 4),
     };
     commentsArr.push(newComment);
@@ -83,7 +84,7 @@ const getRandomCommentsArray = function () {
 
 const getRandomObjectsArray = function () {
   const objectsArray = [];
-  for (let i = 0; i < 25; i++) {
+  for (let i = 0; i < SIMILAR_OBJECTS_QUANTITY; i++) {
     const newObject = {
       id: i + 1,
       url: `photos/${i + 1}.jpg`,
