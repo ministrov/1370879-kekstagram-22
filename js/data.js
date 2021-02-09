@@ -1,6 +1,7 @@
 
 // Необходимо написать функцию для создания массива из 25 сгенерированных объектов.
 //  Каждый объект массива — описание фотографии, опубликованной пользователем.
+import { getRandomInteger,getRandomArrayEl } from './util.js';
 
 const SIMILAR_OBJECTS_QUANTITY = 25;
 const AUTHOR_NAME = [
