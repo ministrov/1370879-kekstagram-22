@@ -27,6 +27,5 @@ const getRandomArrayEl = function (array, min, max) {
 
 export {
   getRandomInteger,
-  getMaxStringLength,
   getRandomArrayEl
 }

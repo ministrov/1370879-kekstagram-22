@@ -1,6 +1,3 @@
-import { getRandomInteger,getMaxStringLength,getRandomArrayEl } from './util.js';
+import './util.js';
 import './data.js';
-
-getRandomInteger();
-getMaxStringLength();
-getRandomArrayEl();
+import './user-miniature.js';
