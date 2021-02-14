@@ -1,5 +1,4 @@
 // Отрисовать фотографии других пользователей
-import {getRandomInteger} from './util.js';
 
 const userPictures = document.querySelector('.pictures');
 const templateFragment = document.querySelector('#picture').content;
