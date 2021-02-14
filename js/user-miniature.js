@@ -1,23 +1,32 @@
 // Отрисовать фотографии других пользователей
+import {getRandomInteger} from './util.js';
 
 const userPictures = document.querySelector('.pictures');
 const templateFragment = document.querySelector('#picture').content;
 const template = templateFragment.querySelector('.picture');
-const userComments = templateFragment.querySelector('.picture__comments')
-const userLikes = templateFragment.querySelector('.picture__likes');
+const userComments = template.querySelector('.picture__comments')
+const userLikes = template.querySelector('.picture__likes');
+const imgUrl = template.querySelector('.picture__img');
 
 const fragment = document.createDocumentFragment();
 
-const makeUserMiniatures = function () {
-  const newElement = template.cloneNode(true);
-  for (let i = 0; i < 5; i++) {
-    newElement.classList.add('user-miniatures');
-    userComments.textContent = '15';
-    userLikes.textContent = '1534';
-    fragment.appendChild(newElement);
-  }
+const makeElement = function (tagName) {
+  const element = document.createElement(tagName);
+  element.classList.add('user-miniatures');
 
-  return newElement;
+  return element;
+}
+
+const makeUserMiniatures = function () {
+  const divElement = makeElement('div');
+  const newElement = template.cloneNode(true);
+  imgUrl.src = 'photos/5.jpg';
+  userComments.textContent = 15;
+  userLikes.textContent = 134;
+  fragment.appendChild(divElement);
+  divElement.appendChild(newElement);
+
+  return divElement;
 }
 
 makeUserMiniatures();
