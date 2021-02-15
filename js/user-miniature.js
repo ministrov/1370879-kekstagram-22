@@ -18,9 +18,9 @@ const makeElement = function (tagName) {
 }
 
 const makeUserMiniatures = function () {
-  for (let i = 0; i <= SIMILAR_OBJECTS_QUANTITY; i++) {
-    const divElement = makeElement('div');
-    const newElement = template.cloneNode(true);
+  for (let i = 0; i < SIMILAR_OBJECTS_QUANTITY; i++) {
+    let divElement = makeElement('div');
+    let newElement = template.cloneNode(true);
     imgUrl.src = `photos/${i + 1}.jpg`;
     userComments.textContent = 15;
     userLikes.textContent = 134;
