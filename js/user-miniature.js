@@ -1,34 +1,27 @@
 // Отрисовать фотографии других пользователей
-import {SIMILAR_OBJECTS_QUANTITY} from './data.js';
+import objectsArray from './data.js';
 
 const userPictures = document.querySelector('.pictures');
-const templateFragment = document.querySelector('#picture').content;
-const template = templateFragment.querySelector('.picture');
-const userComments = template.querySelector('.picture__comments')
-const userLikes = template.querySelector('.picture__likes');
-const imgUrl = template.querySelector('.picture__img');
+const templateFragment = document.querySelector('#picture').content.querySelector('.picture');
+const userComments = templateFragment.querySelector('.picture__comments')
+const userLikes = templateFragment.querySelector('.picture__likes');
 
-const fragment = document.createDocumentFragment();
+const renderUserImage = function ({url, comments, likes}) {
+  const userImage = templateFragment.cloneNode(true);
+  userImage.querySelector('.picture__img').src = url;
+  userComments.textContent = comments;
+  userLikes.textContent = likes;
 
-const makeElement = function (tagName) {
-  const element = document.createElement(tagName);
-  element.classList.add('user-miniatures');
-
-  return element;
+  return userImage;
 }
 
-const makeUserMiniatures = function () {
-  for (let i = 0; i < SIMILAR_OBJECTS_QUANTITY; i++) {
-    let divElement = makeElement('div');
-    let newElement = template.cloneNode(true);
-    imgUrl.src = `photos/${i + 1}.jpg`;
-    userComments.textContent = 15;
-    userLikes.textContent = 134;
-    divElement.appendChild(newElement);
-    fragment.appendChild(divElement);
-  }
+const renderUserImages = function () {
+  const fragment = document.createDocumentFragment();
+  objectsArray.forEach((item) => {
+    fragment.appendChild(renderUserImage(item));
+  });
+
+  userPictures.appendChild(fragment)
 }
 
-makeUserMiniatures();
-
-userPictures.appendChild(fragment);
+renderUserImages();

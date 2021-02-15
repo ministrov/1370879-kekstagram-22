@@ -56,8 +56,10 @@ const getRandomCommentsArray = function () {
   return commentsArr;
 }
 
+let objectsArray;
+
 const getRandomObjectsArray = function () {
-  const objectsArray = [];
+  objectsArray = [];
   for (let i = 0; i < SIMILAR_OBJECTS_QUANTITY; i++) {
     const newObject = {
       id: i + 1,
@@ -73,4 +75,4 @@ const getRandomObjectsArray = function () {
 
 getRandomObjectsArray();
 
-export {SIMILAR_OBJECTS_QUANTITY}
+export default objectsArray;
