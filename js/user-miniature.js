@@ -1,4 +1,5 @@
 // Отрисовать фотографии других пользователей
+import {SIMILAR_OBJECTS_QUANTITY} from './data.js';
 
 const userPictures = document.querySelector('.pictures');
 const templateFragment = document.querySelector('#picture').content;
@@ -17,15 +18,15 @@ const makeElement = function (tagName) {
 }
 
 const makeUserMiniatures = function () {
-  const divElement = makeElement('div');
-  const newElement = template.cloneNode(true);
-  imgUrl.src = 'photos/5.jpg';
-  userComments.textContent = 15;
-  userLikes.textContent = 134;
-  fragment.appendChild(divElement);
-  divElement.appendChild(newElement);
-
-  return divElement;
+  for (let i = 0; i <= SIMILAR_OBJECTS_QUANTITY; i++) {
+    const divElement = makeElement('div');
+    const newElement = template.cloneNode(true);
+    imgUrl.src = `photos/${i + 1}.jpg`;
+    userComments.textContent = 15;
+    userLikes.textContent = 134;
+    divElement.appendChild(newElement);
+    fragment.appendChild(divElement);
+  }
 }
 
 makeUserMiniatures();

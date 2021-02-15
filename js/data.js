@@ -72,3 +72,5 @@ const getRandomObjectsArray = function () {
 }
 
 getRandomObjectsArray();
+
+export {SIMILAR_OBJECTS_QUANTITY}
