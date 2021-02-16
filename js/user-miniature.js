@@ -9,7 +9,7 @@ const userLikes = templateFragment.querySelector('.picture__likes');
 const renderUserImage = function ({url, comments, likes}) {
   const userImage = templateFragment.cloneNode(true);
   userImage.querySelector('.picture__img').src = url;
-  userComments.textContent = comments;
+  userComments.textContent = comments.length;
   userLikes.textContent = likes;
 
   return userImage;
