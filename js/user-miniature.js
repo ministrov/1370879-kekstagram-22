@@ -1,5 +1,6 @@
 // Отрисовать фотографии других пользователей
 import objectsArray from './data.js';
+import openBigPicture from './render-big-picture.js';
 
 const userPictures = document.querySelector('.pictures');
 const templateFragment = document.querySelector('#picture').content.querySelector('.picture');
@@ -11,7 +12,9 @@ const renderUserImage = function ({url, comments, likes}) {
   userImage.querySelector('.picture__img').src = url;
   userComments.textContent = comments.length;
   userLikes.textContent = likes;
-
+  userImage.onclick = () => {
+    openBigPicture({url, comments, likes});
+  }
   return userImage;
 }
 
@@ -21,7 +24,8 @@ const renderUserImages = function () {
     fragment.appendChild(renderUserImage(item));
   });
 
-  userPictures.appendChild(fragment)
+  userPictures.appendChild(fragment);
 }
 
 renderUserImages();
+export {templateFragment};
