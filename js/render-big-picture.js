@@ -1,5 +1,3 @@
-import {templateFragment} from './user-miniature.js';
-
 const bigPicture = document.querySelector('.big-picture');
 const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
 const likesCount = bigPicture.querySelector('.likes-count');
