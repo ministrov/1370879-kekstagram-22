@@ -41,10 +41,11 @@ const openBigPicture = function (image) {
 const closeBigPicture = function () {
   document.body.classList.remove('modal-open');
   bigPicture.classList.add('hidden');
+  document.removeEventListener('click', closeBigPicture);
 }
 
-buttonClose.onclick = () => {
+buttonClose.addEventListener('click', function () {
   closeBigPicture();
-}
+});
 
 export default openBigPicture;

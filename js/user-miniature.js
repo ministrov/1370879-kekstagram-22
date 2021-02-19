@@ -12,9 +12,9 @@ const renderUserImage = function ({url, comments, likes}) {
   userImage.querySelector('.picture__img').src = url;
   userComments.textContent = comments.length;
   userLikes.textContent = likes;
-  userImage.onclick = () => {
+  userImage.addEventListener('click', function () {
     openBigPicture({url, comments, likes});
-  }
+  });
   return userImage;
 }
 
