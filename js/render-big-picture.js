@@ -44,6 +44,8 @@ const closeBigPicture = function () {
   buttonClose.removeEventListener('click', closeBigPicture);
 }
 
-buttonClose.addEventListener('click', closeBigPicture);
+buttonClose.addEventListener('click', function () {
+  closeBigPicture();
+});
 
 export default openBigPicture;
