@@ -7,7 +7,8 @@ const uploadInput = document.querySelector('.img-upload__input');
 let scale = 100;
 const effectRadioGroup = editingForm.querySelector('.img-upload__effects');
 const effectLevel = editingForm.querySelector('.img-upload__effect-level');
-const effectLevelInput = editingForm.querySelector('.effect-level__value');
+const effectLevelSlider = editingForm.querySelector('.effect-level__slider');
+const uploadPreviewImg = editingForm.querySelector('.img-upload__preview').querySelector('img');
 
 const onCloseEditingFormClick = function () {
   editingForm.classList.add('hidden');
@@ -45,13 +46,27 @@ scaleControlSmaller.addEventListener('click', function () {
 effectRadioGroup.addEventListener('click', function (evt) {
   if (evt.target.id === 'effect-none') {
     effectLevel.classList.add('hidden');
+    uploadPreviewImg.classList.remove('effects__preview--chrome');
+    uploadPreviewImg.classList.remove('effects__preview--sepia');
+    uploadPreviewImg.classList.remove('effects__preview--marvin');
+    uploadPreviewImg.classList.remove('effects__preview--phobos');
+    uploadPreviewImg.classList.remove('effects__preview--heat');
+  } else if (evt.target.id === 'effect-chrome') {
+    uploadPreviewImg.classList.add('effects__preview--chrome');
+  } else if (evt.target.id === 'effect-sepia') {
+    uploadPreviewImg.classList.add('effects__preview--sepia');
+  } else if (evt.target.id === 'effect-marvin') {
+    uploadPreviewImg.classList.add('effects__preview--marvin');
+  } else if (evt.target.id === 'effect-phobos') {
+    uploadPreviewImg.classList.add('effects__preview--phobos');
+  } else if (evt.target.id === 'effect-heat') {
+    uploadPreviewImg.classList.add('effects__preview--heat');
   } else {
     effectLevel.classList.remove('hidden');
   }
 });
 
-/* eslint-disable-next-line no-undef */
-noUiSlider.create(effectLevelInput, {
+window.noUiSlider.create(effectLevelSlider, {
   range: {
     min: 0,
     max: 100,
@@ -59,4 +74,4 @@ noUiSlider.create(effectLevelInput, {
   start: 80,
   step: 1,
   connect: 'lower',
-})
+});
