@@ -46,14 +46,24 @@ uploadInput.addEventListener('change', function (evt) {
 
 scaleControlBigger.addEventListener('click', function () {
   if (scale < Size.MAX) {
-    scale += 25;
+    scale += Size.MIN;
+    if (scaleControlInput.value === Size.MAX) {
+      uploadPreviewImg.style.transform = 'scale(1)';
+    }
   }
   scaleControlInput.value = `${scale}%`;
 });
 
 scaleControlSmaller.addEventListener('click', function () {
-  if (scale > 25) {
-    scale -= 25;
+  if (scale > Size.MIN) {
+    scale -= Size.MIN;
+  }
+  if (scaleControlInput.value === Size.MIN) {
+    uploadPreviewImg.style.transform = 'scale(0.25)';
+  } else if (scaleControlInput.value === 50) {
+    uploadPreviewImg.style.transform = 'scale(0.50)';
+  } else if (scaleControlInput.value === 75) {
+    uploadPreviewImg.style.transform = 'scale(0.75)';
   }
   scaleControlInput.value = `${scale}%`;
 });
@@ -67,6 +77,18 @@ const effects = {
   },
   none: () => {
     return 'none';
+  },
+  sepia: () => {
+    return `sepia(${parseInt(effectLevelValue.value, 10) * 0.01})`;
+  },
+  marvin: () => {
+    return `invert(${scale})`;
+  },
+  fobos: () => {
+    return `blur(${scale})`;
+  },
+  znoy: () => {
+    return `brightness(${scale})`;
   },
 };
 
