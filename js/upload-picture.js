@@ -26,16 +26,18 @@ const effectLevelSlider = editingForm.querySelector('.effect-level__slider');
 const uploadPreviewImg = editingForm.querySelector('.img-upload__preview').querySelector('img');
 const effectLevelValue = editingForm.querySelector('.effect-level__value');
 
-const onCloseEditingFormClick = function () {
+
+
+const onCloseEditingFormClick = () => {
   editingForm.classList.add('hidden');
   document.body.classList.remove('modal-open');
-
   uploadInput.value = '';
-
+  uploadPreviewImg.style.transform = 'scale(1)';
+  uploadPreviewImg.style.filter = 'none';
   closeEditingForm.removeEventListener('click', onCloseEditingFormClick);
 };
 
-uploadInput.addEventListener('change', function (evt) {
+uploadInput.addEventListener('change', (evt) => {
   if (evt.target.value !== '') {
     editingForm.classList.remove('hidden');
     document.body.classList.add('modal-open');
@@ -46,7 +48,7 @@ uploadInput.addEventListener('change', function (evt) {
 });
 
 
-scaleControlBigger.addEventListener('click', function () {
+scaleControlBigger.addEventListener('click', () => {
   if (scale < Size.MAX) {
     scale += Size.MIN;
   }
@@ -54,7 +56,7 @@ scaleControlBigger.addEventListener('click', function () {
   scaleControlInput.value = `${scale}%`;
 });
 
-scaleControlSmaller.addEventListener('click', function () {
+scaleControlSmaller.addEventListener('click', () => {
   if (scale > Size.MIN) {
     scale -= Size.MIN;
   }
@@ -85,6 +87,7 @@ const effects = {
     return `brightness(${parseInt(effectLevelValue.value, 10) * 0.1})`;
   },
 };
+
 
 const onEffectRadioGroupClick = (evt) => {
   if (evt.target.classList.contains('effects__preview')) {
