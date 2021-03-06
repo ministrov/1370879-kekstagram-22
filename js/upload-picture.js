@@ -125,3 +125,5 @@ effectLevelSlider.noUiSlider.on('change', () => {
 
   uploadPreviewImg.style.filter = effects[lastClass.replace('effects__preview--', '')]();
 });
+
+export {editingForm};
