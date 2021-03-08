@@ -7,7 +7,7 @@ const templateFragment = document.querySelector('#picture').content.querySelecto
 const userComments = templateFragment.querySelector('.picture__comments')
 const userLikes = templateFragment.querySelector('.picture__likes');
 
-const renderUserImage = function ({url, comments, likes}) {
+const renderUserImage = ({url, comments, likes}) => {
   const userImage = templateFragment.cloneNode(true);
   userImage.querySelector('.picture__img').src = url;
   userComments.textContent = comments.length;
@@ -18,7 +18,7 @@ const renderUserImage = function ({url, comments, likes}) {
   return userImage;
 }
 
-const renderUserImages = function () {
+const renderUserImages = () => {
   const fragment = document.createDocumentFragment();
   objectsArray.forEach((item) => {
     fragment.appendChild(renderUserImage(item));

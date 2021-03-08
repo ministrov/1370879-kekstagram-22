@@ -9,7 +9,7 @@ const socialComments = bigPicture.querySelector('.social__comments');
 const socialCaption = bigPicture.querySelector('.social__caption');
 const buttonClose = bigPicture.querySelector('.big-picture__cancel');
 
-const renderComment = function (comment) {
+const renderComment = (comment) => {
   const commentElement = commentTemplate.cloneNode(true);
   const img = commentElement.querySelector('.social__picture');
   const commentText = commentElement.querySelector('.social__text');
@@ -20,7 +20,7 @@ const renderComment = function (comment) {
   return commentElement;
 }
 
-const renderBigPicture = function (image) {
+const renderBigPicture = (image) => {
   bigPictureImg.src = image.url;
   likesCount.textContent = image.likes;
   commentsCount.textContent = image.comments.length;
@@ -30,7 +30,7 @@ const renderBigPicture = function (image) {
   socialCaption.textContent = image.description;
 }
 
-const openBigPicture = function (image) {
+const openBigPicture = (image) => {
   socialCommentsCount.classList.add('hidden');
   commentsLoader.classList.add('hidden');
   renderBigPicture(image);
@@ -38,13 +38,13 @@ const openBigPicture = function (image) {
   bigPicture.classList.remove('hidden');
 }
 
-const closeBigPicture = function () {
+const closeBigPicture = () => {
   document.body.classList.remove('modal-open');
   bigPicture.classList.add('hidden');
   buttonClose.removeEventListener('click', closeBigPicture);
 }
 
-buttonClose.addEventListener('click', function () {
+buttonClose.addEventListener('click', () => {
   closeBigPicture();
 });
 
