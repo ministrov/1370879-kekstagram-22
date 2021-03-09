@@ -1,4 +1,5 @@
 /* noUiSlider */
+import {isEscEvent} from './util.js';
 
 let scale = 100;
 const percent = '%';
@@ -35,8 +36,15 @@ const onCloseEditingFormClick = () => {
   uploadPreviewImg.style.transform = 'scale(1)';
   uploadPreviewImg.style.filter = 'none';
   closeEditingForm.removeEventListener('click', onCloseEditingFormClick);
+  closeEditingForm.removeEventListener('keydown', onCloseEditingFormEscKeydown);
 };
-
+const onCloseEditingFormEscKeydown = (evt) => {
+  if (isEscEvent(evt)) {
+    evt.preventDefault();
+    editingForm.classList.add('hidden');
+    document.body.classList.remove('modal-open');
+  }
+};
 uploadInput.addEventListener('change', (evt) => {
   if (evt.target.value !== '') {
     editingForm.classList.remove('hidden');
@@ -44,6 +52,7 @@ uploadInput.addEventListener('change', (evt) => {
     effectLevel.classList.add('hidden');
     scale = 100;
     closeEditingForm.addEventListener('click', onCloseEditingFormClick);
+    closeEditingForm.addEventListener('keydown', onCloseEditingFormEscKeydown);
   }
 });
 

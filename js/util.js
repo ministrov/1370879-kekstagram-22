@@ -25,7 +25,13 @@ const getRandomArrayEl = (array, min, max) => {
   return array[getRandomInteger(min, max - 1)];
 }
 
+// Нажатие  на кнопу ESC
+const isEscEvent = (evt) => {
+  return evt.key === ('Escape', 'Esc');
+}
+
 export {
   getRandomInteger,
-  getRandomArrayEl
+  getRandomArrayEl,
+  isEscEvent
 }
