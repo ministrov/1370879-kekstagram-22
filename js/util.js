@@ -1,5 +1,9 @@
 // Получение случайного целого числа в заданном интервале, включительно
 
+const Keys = {
+  ESC: 'Escape' || 'Esc',
+}
+
 const getRandomInteger = (min, max) => {
   if (min < 0 || max < 0) {
     return -1;
@@ -27,7 +31,7 @@ const getRandomArrayEl = (array, min, max) => {
 
 // Нажатие  на кнопу ESC
 const isEscEvent = (evt) => {
-  return evt.key === ('Escape', 'Esc');
+  return evt.key === Keys.ESC;
 }
 
 export {

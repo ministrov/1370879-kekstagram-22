@@ -1,10 +1,11 @@
-import {editingForm} from './upload-picture.js';
+// import {editingForm} from './upload-picture.js';
 
 const MAX_SYMBOL = 20;
 const MAX_HASHTAG = 5;
 const MAX_COMMENTS = 140;
-const hashTagInput = editingForm.querySelector('.text__hashtags');
-const descriptionText = editingForm.querySelector('.text__description');
+const hashTagInput = document.querySelector('.text__hashtags');
+const descriptionText = document.querySelector('.text__description');
+const regex = new RegExp(/[^a-zа-яё#]+/i);
 
 hashTagInput.addEventListener('input', () => {
   let invalidMessage = [];
@@ -13,17 +14,19 @@ hashTagInput.addEventListener('input', () => {
   if (!inputText) {
     return
   }
+  /*
   const specialSymbolsArr = ['!','@', '#', '$', '%', '^', '&', '*', '()', '-', '=', ','];
   const isContainSpecialSymbols = specialSymbolsArr.some((item) => {
     return item;
   });
   if (isContainSpecialSymbols) {
     invalidMessage.push('строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы');
-  }
+  }*/
   const inputArray = inputText.split(/\s+/);
   if (inputArray.length === 0) {
     return
   }
+
   const isStartNotHashTag = inputArray.some((item) => {
     return item[0] !== '#';
   });
@@ -57,6 +60,14 @@ hashTagInput.addEventListener('input', () => {
   if (inputArray.length > MAX_HASHTAG) {
     invalidMessage.push ('Нельзя указать больше пяти хештегов');
   }
+
+  const isSpecialChars = inputArray.some((item) => {
+    return regex.test(item);
+  });
+  if (isSpecialChars) {
+    invalidMessage.push('Не те буквы')
+  }
+
   if (invalidMessage.length > 0) {
     hashTagInput.setCustomValidity(invalidMessage.join('. \n'));
     hashTagInput.style.border = '2px solid red';
@@ -71,3 +82,5 @@ descriptionText.addEventListener('invalid', () => {
     descriptionText.setCustomValidity('Длина комментария не может составлять больше 140 символов');
   }
 });
+
+export {hashTagInput};

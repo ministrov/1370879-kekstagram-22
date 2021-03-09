@@ -1,5 +1,6 @@
 /* noUiSlider */
 import {isEscEvent} from './util.js';
+import {hashTagInput} from './validate-form.js';
 
 let scale = 100;
 const percent = '%';
@@ -35,14 +36,16 @@ const onCloseEditingFormClick = () => {
   uploadInput.value = '';
   uploadPreviewImg.style.transform = 'scale(1)';
   uploadPreviewImg.style.filter = 'none';
+  hashTagInput.style.border = 'none';
   closeEditingForm.removeEventListener('click', onCloseEditingFormClick);
-  closeEditingForm.removeEventListener('keydown', onCloseEditingFormEscKeydown);
+  document.removeEventListener('keydown', onCloseEditingFormEscKeydown);
 };
 const onCloseEditingFormEscKeydown = (evt) => {
-  if (isEscEvent(evt)) {
+  if (isEscEvent(evt) && !evt.target.classList.contains('text__hashtags') && !evt.target.classList.contains('text__description')) {
     evt.preventDefault();
     editingForm.classList.add('hidden');
     document.body.classList.remove('modal-open');
+    hashTagInput.style.border = 'none';
   }
 };
 uploadInput.addEventListener('change', (evt) => {
@@ -52,7 +55,7 @@ uploadInput.addEventListener('change', (evt) => {
     effectLevel.classList.add('hidden');
     scale = 100;
     closeEditingForm.addEventListener('click', onCloseEditingFormClick);
-    closeEditingForm.addEventListener('keydown', onCloseEditingFormEscKeydown);
+    document.addEventListener('keydown', onCloseEditingFormEscKeydown);
   }
 });
 

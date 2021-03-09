@@ -1,3 +1,5 @@
+import {isEscEvent} from './util.js';
+
 const bigPicture = document.querySelector('.big-picture');
 const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
 const likesCount = bigPicture.querySelector('.likes-count');
@@ -36,12 +38,20 @@ const openBigPicture = (image) => {
   renderBigPicture(image);
   document.body.classList.add('modal-open');
   bigPicture.classList.remove('hidden');
+  document.addEventListener('keydown', onEscBigPictureKeydown);
 }
 
 const closeBigPicture = () => {
   document.body.classList.remove('modal-open');
   bigPicture.classList.add('hidden');
   buttonClose.removeEventListener('click', closeBigPicture);
+  document.removeEventListener('keydown', onEscBigPictureKeydown);
+}
+
+const onEscBigPictureKeydown = (evt) => {
+  if (isEscEvent(evt)) {
+    closeBigPicture();
+  }
 }
 
 buttonClose.addEventListener('click', () => {
