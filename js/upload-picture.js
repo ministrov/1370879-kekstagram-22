@@ -1,4 +1,6 @@
 /* noUiSlider */
+import {isEscEvent} from './util.js';
+import {hashTagInput} from './validate-form.js';
 
 let scale = 100;
 const percent = '%';
@@ -34,9 +36,18 @@ const onCloseEditingFormClick = () => {
   uploadInput.value = '';
   uploadPreviewImg.style.transform = 'scale(1)';
   uploadPreviewImg.style.filter = 'none';
+  hashTagInput.style.border = 'none';
   closeEditingForm.removeEventListener('click', onCloseEditingFormClick);
+  document.removeEventListener('keydown', onCloseEditingFormEscKeydown);
 };
-
+const onCloseEditingFormEscKeydown = (evt) => {
+  if (isEscEvent(evt) && !evt.target.classList.contains('text__hashtags') && !evt.target.classList.contains('text__description')) {
+    evt.preventDefault();
+    editingForm.classList.add('hidden');
+    document.body.classList.remove('modal-open');
+    hashTagInput.style.border = 'none';
+  }
+};
 uploadInput.addEventListener('change', (evt) => {
   if (evt.target.value !== '') {
     editingForm.classList.remove('hidden');
@@ -44,6 +55,7 @@ uploadInput.addEventListener('change', (evt) => {
     effectLevel.classList.add('hidden');
     scale = 100;
     closeEditingForm.addEventListener('click', onCloseEditingFormClick);
+    document.addEventListener('keydown', onCloseEditingFormEscKeydown);
   }
 });
 
@@ -125,3 +137,5 @@ effectLevelSlider.noUiSlider.on('change', () => {
 
   uploadPreviewImg.style.filter = effects[lastClass.replace('effects__preview--', '')]();
 });
+
+export {editingForm};

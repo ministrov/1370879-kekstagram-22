@@ -1,6 +1,10 @@
 // Получение случайного целого числа в заданном интервале, включительно
 
-const getRandomInteger = function (min, max) {
+const Keys = {
+  ESC: 'Escape' || 'Esc',
+}
+
+const getRandomInteger = (min, max) => {
   if (min < 0 || max < 0) {
     return -1;
   }
@@ -14,18 +18,24 @@ const getRandomInteger = function (min, max) {
 
 // Функция для проверки максимальной длины строки
 
-const getMaxStringLength = function (text, sign) {
+const getMaxStringLength = (text, sign) => {
   return text.length <= sign ? true : false;
 }
 
 getMaxStringLength('Hello World', 10);
 
 // El - element
-const getRandomArrayEl = function (array, min, max) {
+const getRandomArrayEl = (array, min, max) => {
   return array[getRandomInteger(min, max - 1)];
+}
+
+// Нажатие  на кнопу ESC
+const isEscEvent = (evt) => {
+  return evt.key === Keys.ESC;
 }
 
 export {
   getRandomInteger,
-  getRandomArrayEl
+  getRandomArrayEl,
+  isEscEvent
 }

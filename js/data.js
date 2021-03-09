@@ -28,20 +28,20 @@ const MESSAGE = [
 
 const LIKES = getRandomInteger(15, 200);
 
-const getAvatarLink = function () {
+const getAvatarLink = () => {
   return `img/avatar-${getRandomInteger(1, 6)}.svg`
 }
 
 const usedId = [];
 
-const generateUniqId = function () {
+const generateUniqId = () => {
   const id = getRandomInteger(0, 1000);
   if (!usedId.includes(id)) {
     usedId.push(id);
   }
   return id;
 }
-const getRandomCommentsArray = function () {
+const getRandomCommentsArray = () => {
   const commentsArr = [];
   const commentsCount = getRandomInteger(1, 10);
   for (let i = 0; i < commentsCount; i++) {
@@ -58,7 +58,7 @@ const getRandomCommentsArray = function () {
 
 let objectsArray;
 
-const getRandomObjectsArray = function () {
+const getRandomObjectsArray = () => {
   objectsArray = [];
   for (let i = 0; i < SIMILAR_OBJECTS_QUANTITY; i++) {
     const newObject = {
