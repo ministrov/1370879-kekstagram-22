@@ -65,7 +65,7 @@ hashTagInput.addEventListener('input', () => {
     return regex.test(item);
   });
   if (isSpecialChars) {
-    invalidMessage.push('Не те буквы')
+    invalidMessage.push('Строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы');
   }
 
   if (invalidMessage.length > 0) {

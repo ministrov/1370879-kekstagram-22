@@ -1,6 +1,7 @@
 /* noUiSlider */
 import {isEscEvent} from './util.js';
 import {hashTagInput} from './validate-form.js';
+import api from './api.js';
 
 let scale = 100;
 const percent = '%';
@@ -27,6 +28,7 @@ const effectLevel = editingForm.querySelector('.img-upload__effect-level');
 const effectLevelSlider = editingForm.querySelector('.effect-level__slider');
 const uploadPreviewImg = editingForm.querySelector('.img-upload__preview').querySelector('img');
 const effectLevelValue = editingForm.querySelector('.effect-level__value');
+const imgUploadForm = document.querySelector('.img-upload__form');
 
 
 
@@ -136,6 +138,12 @@ effectLevelSlider.noUiSlider.on('change', () => {
   effectLevelValue.value = effectLevelSlider.noUiSlider.get();
 
   uploadPreviewImg.style.filter = effects[lastClass.replace('effects__preview--', '')]();
+});
+
+imgUploadForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  const formData = new FormData(imgUploadForm);
+  api.postData(formData);
 });
 
 export {editingForm};
