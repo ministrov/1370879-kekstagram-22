@@ -143,7 +143,17 @@ effectLevelSlider.noUiSlider.on('change', () => {
 imgUploadForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const formData = new FormData(imgUploadForm);
-  api.postData(formData);
+  api.postData(formData).then((response) => {
+    if (response.ok) {
+      const successTemplate = document.querySelector('#success').content;
+      const successTemplateBlock = successTemplate.cloneNode(true);
+      document.body.appendChild(successTemplateBlock);
+    }
+  }).catch(() => {
+    const errorPostTemplate = document.querySelector('#error');
+    const errorPostTemplateBlock = errorPostTemplate.cloneNode(true);
+    document.body.appendChild(errorPostTemplateBlock);
+  });
 });
 
 export {editingForm};
