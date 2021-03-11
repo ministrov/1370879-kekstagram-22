@@ -29,8 +29,8 @@ const effectLevelSlider = editingForm.querySelector('.effect-level__slider');
 const uploadPreviewImg = editingForm.querySelector('.img-upload__preview').querySelector('img');
 const effectLevelValue = editingForm.querySelector('.effect-level__value');
 const imgUploadForm = document.querySelector('.img-upload__form');
-
-
+const successTemplate = document.querySelector('#success').content.querySelector('.success');
+const successButton = successTemplate.querySelector('.success__button');
 
 const onCloseEditingFormClick = () => {
   editingForm.classList.add('hidden');
@@ -140,19 +140,40 @@ effectLevelSlider.noUiSlider.on('change', () => {
   uploadPreviewImg.style.filter = effects[lastClass.replace('effects__preview--', '')]();
 });
 
+const onSuccesButtonClik = () => {
+  successTemplate.classList.add('hidden');
+}
+
+const onSuccesButtonEscKeydown = (evt) => {
+  if (isEscEvent(evt)) {
+    successTemplate.classList.add('hidden');
+  }
+}
+
 imgUploadForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const formData = new FormData(imgUploadForm);
   api.postData(formData).then((response) => {
-    if (response.ok) {
-      const successTemplate = document.querySelector('#success').content;
+    if (response) {
       const successTemplateBlock = successTemplate.cloneNode(true);
       document.body.appendChild(successTemplateBlock);
+      editingForm.classList.add('hidden');
+      document.body.classList.remove('modal-open');
+      uploadInput.value = '';
+      uploadPreviewImg.style.transform = 'scale(1)';
+      uploadPreviewImg.style.filter = 'none';
+      hashTagInput.style.border = 'none';
+      successButton.addEventListener('click', onSuccesButtonClik);
+      document.addEventListener('click', onSuccesButtonClik);
+      successButton.addEventListener('keydown', onSuccesButtonEscKeydown);
+      // закрыть, сбросить форму
+      // навесить события
     }
   }).catch(() => {
-    const errorPostTemplate = document.querySelector('#error');
+    const errorPostTemplate = document.querySelector('#error').content.querySelector('.error');
     const errorPostTemplateBlock = errorPostTemplate.cloneNode(true);
     document.body.appendChild(errorPostTemplateBlock);
+    // навесить события
   });
 });
 

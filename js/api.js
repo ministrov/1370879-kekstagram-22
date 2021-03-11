@@ -11,10 +11,9 @@ const postData = (data) => new Promise((resolve, reject) => {
   fetch(API_POST_URL, {
     method: 'POST',
     body: data,
-    mode: 'no-cors',
-    credentials: 'same-origin',
-  }).then((response) => response.json())
-    .then((data) => resolve(data))
+    /*mode: 'no-cors',
+    credentials: 'same-origin',*/
+  }).then((response) => response.json().then((data) => {resolve(data)}))
     .catch((error) => reject(error));
 });
 
