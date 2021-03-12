@@ -30,6 +30,7 @@ const uploadPreviewImg = editingForm.querySelector('.img-upload__preview').query
 const effectLevelValue = editingForm.querySelector('.effect-level__value');
 const imgUploadForm = document.querySelector('.img-upload__form');
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
+const successInner = successTemplate.querySelector('.success__inner');
 const successButton = successTemplate.querySelector('.success__button');
 
 const onCloseEditingFormClick = () => {
@@ -140,13 +141,15 @@ effectLevelSlider.noUiSlider.on('change', () => {
   uploadPreviewImg.style.filter = effects[lastClass.replace('effects__preview--', '')]();
 });
 
-const onSuccesButtonClik = () => {
-  successTemplate.classList.add('hidden');
+const onSuccesButtonClick = (evt) => {
+  if (evt.currentTarget) {
+    successInner.classList.add('hidden');
+  }
 }
 
 const onSuccesButtonEscKeydown = (evt) => {
   if (isEscEvent(evt)) {
-    successTemplate.classList.add('hidden');
+    successInner.classList.add('hidden');
   }
 }
 
@@ -163,9 +166,9 @@ imgUploadForm.addEventListener('submit', (evt) => {
       uploadPreviewImg.style.transform = 'scale(1)';
       uploadPreviewImg.style.filter = 'none';
       hashTagInput.style.border = 'none';
-      successButton.addEventListener('click', onSuccesButtonClik);
-      document.addEventListener('click', onSuccesButtonClik);
+      successButton.addEventListener('click', onSuccesButtonClick);
       successButton.addEventListener('keydown', onSuccesButtonEscKeydown);
+      // document.addEventListener('click', onSuccesButtonClick);
       // закрыть, сбросить форму
       // навесить события
     }
