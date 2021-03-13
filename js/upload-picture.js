@@ -30,8 +30,6 @@ const uploadPreviewImg = editingForm.querySelector('.img-upload__preview').query
 const effectLevelValue = editingForm.querySelector('.effect-level__value');
 const imgUploadForm = document.querySelector('.img-upload__form');
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
-const successInner = successTemplate.querySelector('.success__inner');
-const successButton = successTemplate.querySelector('.success__button');
 
 const onCloseEditingFormClick = () => {
   editingForm.classList.add('hidden');
@@ -143,13 +141,31 @@ effectLevelSlider.noUiSlider.on('change', () => {
 
 const onSuccesButtonClick = (evt) => {
   if (evt.currentTarget) {
-    successInner.classList.add('hidden');
+    const successSection = document.querySelector('.success');
+    successSection.remove();
   }
 }
 
 const onSuccesButtonEscKeydown = (evt) => {
   if (isEscEvent(evt)) {
-    successInner.classList.add('hidden');
+    const successSection = document.querySelector('.success');
+    successSection.remove();
+    document.body.removeEventListener('keydown', onSuccesButtonEscKeydown);
+  }
+}
+
+const onErrorButtonClick = (evt) => {
+  if (evt.currentTarget) {
+    const errorSection = document.querySelector('.error');
+    errorSection.remove();
+  }
+}
+
+const onErrorButtonEscKeydown = (evt) => {
+  if (isEscEvent(evt)) {
+    const errorSection = document.querySelector('.error');
+    errorSection.remove();
+    document.body.removeEventListener('keydown', onErrorButtonEscKeydown);
   }
 }
 
@@ -160,14 +176,20 @@ imgUploadForm.addEventListener('submit', (evt) => {
     if (response) {
       const successTemplateBlock = successTemplate.cloneNode(true);
       document.body.appendChild(successTemplateBlock);
+      const successDiv = successTemplateBlock.querySelector('.success__inner');
+      successDiv.setAttribute('tabindex', '1');
+      successDiv.style.outline = 'none';
+      successDiv.focus();
       editingForm.classList.add('hidden');
       document.body.classList.remove('modal-open');
       uploadInput.value = '';
       uploadPreviewImg.style.transform = 'scale(1)';
       uploadPreviewImg.style.filter = 'none';
       hashTagInput.style.border = 'none';
+      const successButton = successTemplateBlock.querySelector('.success__button');
       successButton.addEventListener('click', onSuccesButtonClick);
-      successButton.addEventListener('keydown', onSuccesButtonEscKeydown);
+      document.body.addEventListener('keydown', onSuccesButtonEscKeydown);
+      successDiv.addEventListener('blur', onSuccesButtonClick);
       // document.addEventListener('click', onSuccesButtonClick);
       // закрыть, сбросить форму
       // навесить события
@@ -176,6 +198,17 @@ imgUploadForm.addEventListener('submit', (evt) => {
     const errorPostTemplate = document.querySelector('#error').content.querySelector('.error');
     const errorPostTemplateBlock = errorPostTemplate.cloneNode(true);
     document.body.appendChild(errorPostTemplateBlock);
+    const errorDiv = errorPostTemplateBlock.querySelector('.error__inner');
+    errorDiv.setAttribute('tabindex', '1');
+    errorDiv.style.outline = 'none';
+    errorDiv.focus();
+    editingForm.classList.add('hidden');
+    document.body.classList.remove('modal-open');
+    const errorButton = errorPostTemplateBlock.querySelector('.error__button');
+    errorButton.addEventListener('click', onErrorButtonClick);
+    document.body.addEventListener('keydown', onErrorButtonEscKeydown);
+    errorDiv.addEventListener('blur', onErrorButtonClick);
+
     // навесить события
   });
 });
