@@ -1,6 +1,6 @@
 /* noUiSlider */
-import {isEscEvent} from './util.js';
 import {hashTagInput} from './validate-form.js';
+import {isEscEvent} from './util.js';
 
 let scale = 100;
 const percent = '%';
@@ -28,8 +28,6 @@ const effectLevelSlider = editingForm.querySelector('.effect-level__slider');
 const uploadPreviewImg = editingForm.querySelector('.img-upload__preview').querySelector('img');
 const effectLevelValue = editingForm.querySelector('.effect-level__value');
 
-
-
 const onCloseEditingFormClick = () => {
   editingForm.classList.add('hidden');
   document.body.classList.remove('modal-open');
@@ -45,7 +43,6 @@ const onCloseEditingFormEscKeydown = (evt) => {
     evt.preventDefault();
     editingForm.classList.add('hidden');
     document.body.classList.remove('modal-open');
-    hashTagInput.style.border = 'none';
   }
 };
 uploadInput.addEventListener('change', (evt) => {
@@ -138,4 +135,9 @@ effectLevelSlider.noUiSlider.on('change', () => {
   uploadPreviewImg.style.filter = effects[lastClass.replace('effects__preview--', '')]();
 });
 
-export {editingForm};
+export {
+  editingForm,
+  uploadInput,
+  uploadPreviewImg,
+  hashTagInput
+};

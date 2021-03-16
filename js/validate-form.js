@@ -14,14 +14,7 @@ hashTagInput.addEventListener('input', () => {
   if (!inputText) {
     return
   }
-  /*
-  const specialSymbolsArr = ['!','@', '#', '$', '%', '^', '&', '*', '()', '-', '=', ','];
-  const isContainSpecialSymbols = specialSymbolsArr.some((item) => {
-    return item;
-  });
-  if (isContainSpecialSymbols) {
-    invalidMessage.push('строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы');
-  }*/
+
   const inputArray = inputText.split(/\s+/);
   if (inputArray.length === 0) {
     return
@@ -65,7 +58,7 @@ hashTagInput.addEventListener('input', () => {
     return regex.test(item);
   });
   if (isSpecialChars) {
-    invalidMessage.push('Не те буквы')
+    invalidMessage.push('Строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы');
   }
 
   if (invalidMessage.length > 0) {
