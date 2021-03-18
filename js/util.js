@@ -1,7 +1,8 @@
 // Получение случайного целого числа в заданном интервале, включительно
 
 const Keys = {
-  ESC: 'Escape' || 'Esc',
+  ESC: 'Esc',
+  ESCAPE: 'Escape',
 }
 
 const getRandomInteger = (min, max) => {
@@ -14,6 +15,14 @@ const getRandomInteger = (min, max) => {
   }
 
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+const shuffleArray = (a) => {
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 }
 
 // Функция для проверки максимальной длины строки
@@ -31,7 +40,7 @@ const getRandomArrayEl = (array, min, max) => {
 
 // Нажатие  на кнопу ESC
 const isEscEvent = (evt) => {
-  return evt.key === Keys.ESC;
+  return evt.key === Keys.ESC || evt.key === Keys.ESCAPE;
 }
 
 // Debounce function
@@ -39,7 +48,7 @@ const isEscEvent = (evt) => {
 const debounce = (cb, ms) => {
   let timeout;
   return () => {
-    const fnCall = () => { cb.apply(this) }
+    const fnCall = () => cb.apply(this)
     clearTimeout(timeout);
     timeout = setTimeout(fnCall, ms);
   }
@@ -49,5 +58,6 @@ export {
   getRandomInteger,
   getRandomArrayEl,
   isEscEvent,
-  debounce
+  debounce,
+  shuffleArray
 }
