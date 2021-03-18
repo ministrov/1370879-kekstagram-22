@@ -1,9 +1,10 @@
 // Отрисовать фотографии других пользователей
 import openBigPicture from './render-big-picture.js';
 import api from './api.js';
-import {getRandomArrayEl} from './util.js';
+import {getRandomArrayEl, debounce} from './util.js';
 
 const RANDOM_PHOTO_QUANTITY = 10;
+const RERENDER_DELAY = 500;
 const userPictures = document.querySelector('.pictures');
 const templateFragment = document.querySelector('#picture').content.querySelector('.picture');
 const userComments = templateFragment.querySelector('.picture__comments')
@@ -63,7 +64,7 @@ const renderUserImages = () => {
     });
     userPictures.appendChild(fragment);
     imgFilter.classList.remove('img-filters--inactive');
-    buttonRandom.addEventListener('click', () => randomFilter(data));
+    buttonRandom.addEventListener('click', debounce(() => randomFilter(data), RERENDER_DELAY));
     buttonDiscussed.addEventListener('click', () => discussedFilter(data));
     buttonDefault.addEventListener('click', () => defaultFilter(data));
   }).catch(() => {

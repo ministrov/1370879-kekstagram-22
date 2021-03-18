@@ -34,8 +34,20 @@ const isEscEvent = (evt) => {
   return evt.key === Keys.ESC;
 }
 
+// Debounce function
+
+const debounce = (cb, ms) => {
+  let timeout;
+  return () => {
+    const fnCall = () => { cb.apply(this) }
+    clearTimeout(timeout);
+    timeout = setTimeout(fnCall, ms);
+  }
+}
+
 export {
   getRandomInteger,
   getRandomArrayEl,
-  isEscEvent
+  isEscEvent,
+  debounce
 }
