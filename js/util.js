@@ -47,8 +47,8 @@ const isEscEvent = (evt) => {
 
 const debounce = (cb, ms) => {
   let timeout;
-  return () => {
-    const fnCall = () => cb.apply(this)
+  return (evt) => {
+    const fnCall = () => cb.apply(this, [evt])
     clearTimeout(timeout);
     timeout = setTimeout(fnCall, ms);
   }
