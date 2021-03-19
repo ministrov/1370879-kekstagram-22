@@ -4,12 +4,12 @@ const bigPicture = document.querySelector('.big-picture');
 const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
 const likesCount = bigPicture.querySelector('.likes-count');
 const socialCommentsCount = bigPicture.querySelector('.social__comment-count');
-const commentsLoader = bigPicture.querySelector('.comments-loader');
 const bigPictureImg = bigPicture.querySelector('.big-picture__img').querySelector('img');
 const commentsCount = bigPicture.querySelector('.comments-count');
 const socialComments = bigPicture.querySelector('.social__comments');
 const socialCaption = bigPicture.querySelector('.social__caption');
 const buttonClose = bigPicture.querySelector('.big-picture__cancel');
+const commentsLoader = bigPicture.querySelector('.social__comments-loader');
 
 const renderComment = (comment) => {
   const commentElement = commentTemplate.cloneNode(true);
@@ -22,14 +22,34 @@ const renderComment = (comment) => {
   return commentElement;
 }
 
+let start = 0;
+
+const renderComments = (comments) => {
+  let i = start;
+  while (i < start + 5 && i < comments.length) {
+    socialComments.appendChild(renderComment(comments[i]));
+    i++;
+  }
+  start += 5;
+  if (start >= comments.length) {
+    commentsLoader.classList.add('hidden');
+  }
+}
+
 const renderBigPicture = (image) => {
   bigPictureImg.src = image.url;
   likesCount.textContent = image.likes;
   commentsCount.textContent = image.comments.length;
-  for (let i = 0; i < image.comments.length; i++) {
-    socialComments.appendChild(renderComment(image.comments[i]));
-  }
   socialCaption.textContent = image.description;
+  socialComments.innerHTML = '';
+  start = 0;
+  if (image.comments.length > 5) {
+    commentsLoader.classList.remove('hidden');
+  }
+  renderComments(image.comments);
+  commentsLoader.onclick = () => {
+    renderComments(image.comments);
+  }
 }
 
 const openBigPicture = (image) => {

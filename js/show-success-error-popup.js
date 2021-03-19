@@ -1,6 +1,6 @@
 import {isEscEvent} from './util.js';
 import {editingForm} from './upload-picture.js';
-import api from './api.js';
+import {request} from './api.js';
 
 const imgUploadForm = document.querySelector('.img-upload__form');
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
@@ -69,11 +69,11 @@ const showErrorPopup = () => {
 imgUploadForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const formData = new FormData(imgUploadForm);
-  api.postData(formData).then((response) => {
+  request((response) => {
     if (response) {
       showSuccessPopup();
     }
-  }).catch(() => {
+  }, () => {
     showErrorPopup();
-  });
+  }, 'POST', formData);
 });
