@@ -1,5 +1,3 @@
-// import {editingForm} from './upload-picture.js';
-
 const MAX_SYMBOL = 20;
 const MAX_HASHTAG = 5;
 const MAX_COMMENTS = 140;

@@ -2,6 +2,7 @@
 import {hashTagInput} from './validate-form.js';
 import {isEscEvent} from './util.js';
 
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 let scale = 100;
 const percent = '%';
 const pixel = 'px';
@@ -46,14 +47,24 @@ const onCloseEditingFormEscKeydown = (evt) => {
   }
 };
 uploadInput.addEventListener('change', (evt) => {
-  if (evt.target.value !== '') {
+  const file = uploadInput.files[0];
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((it) => {
+    return fileName.endsWith(it);
+  })
+  const reader = new FileReader();
+  if (evt.target.value !== '' && matches) {
     editingForm.classList.remove('hidden');
     document.body.classList.add('modal-open');
     effectLevel.classList.add('hidden');
     scale = 100;
+    reader.addEventListener('load', () => {
+      uploadPreviewImg.src = reader.result;
+    })
     closeEditingForm.addEventListener('click', onCloseEditingFormClick);
     document.addEventListener('keydown', onCloseEditingFormEscKeydown);
   }
+  reader.readAsDataURL(file);
 });
 
 
