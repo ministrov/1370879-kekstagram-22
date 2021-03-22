@@ -54,7 +54,7 @@ const renderBigPicture = (image) => {
 }
 
 const openBigPicture = (image) => {
-  socialCommentsCount.classList.add('hidden');
+  socialCommentsCount.classList.remove('hidden');
   commentsLoader.classList.add('hidden');
   renderBigPicture(image);
   document.body.classList.add('modal-open');

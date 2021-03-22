@@ -47,7 +47,7 @@ const showSuccessPopup = () => {
   document.body.classList.remove('modal-open');
   successButton.addEventListener('click', onSuccesButtonClick);
   document.body.addEventListener('keydown', onSuccesButtonEscKeydown);
-  successDiv.addEventListener('blur', onSuccesButtonClick);
+  // successDiv.addEventListener('blur', onSuccesButtonClick);
 }
 
 const showErrorPopup = () => {
