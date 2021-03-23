@@ -33,7 +33,10 @@ const renderComments = (comments) => {
   }
   start += 5;
   if (start >= comments.length) {
+    socialCommentsCount.childNodes[0].textContent = `${comments.length} из `;
     commentsLoader.classList.add('hidden');
+  } else {
+    socialCommentsCount.childNodes[0].textContent = `${start} из `;
   }
 }
 

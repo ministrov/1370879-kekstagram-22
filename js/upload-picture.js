@@ -1,4 +1,3 @@
-/* noUiSlider */
 import {hashTagInput} from './validate-form.js';
 import {isEscEvent} from './util.js';
 
@@ -28,6 +27,7 @@ const effectLevel = editingForm.querySelector('.img-upload__effect-level');
 const effectLevelSlider = editingForm.querySelector('.effect-level__slider');
 const uploadPreviewImg = editingForm.querySelector('.img-upload__preview').querySelector('img');
 const effectLevelValue = editingForm.querySelector('.effect-level__value');
+const effectsPreview = document.querySelectorAll('.effects__preview');
 
 const onCloseEditingFormClick = () => {
   editingForm.classList.add('hidden');
@@ -60,6 +60,12 @@ uploadInput.addEventListener('change', (evt) => {
     scale = 100;
     reader.addEventListener('load', () => {
       uploadPreviewImg.src = reader.result;
+      for (let i = 0; i < effectsPreview.length; i++) {
+        effectsPreview[i].style.background = `url(${reader.result})`;
+        effectsPreview[i].style.backgroundSize = 'contain';
+        effectsPreview[i].style.backgroundPosition = 'center';
+        effectsPreview[i].style.backgroundRepeat = 'no-repeat';
+      }
     })
     closeEditingForm.addEventListener('click', onCloseEditingFormClick);
     document.addEventListener('keydown', onCloseEditingFormEscKeydown);

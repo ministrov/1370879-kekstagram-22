@@ -1,4 +1,3 @@
-// Отрисовать фотографии других пользователей
 import openBigPicture from './render-big-picture.js';
 import {request} from './api.js';
 import {debounce, shuffleArray} from './util.js';
