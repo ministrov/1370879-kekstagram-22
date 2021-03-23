@@ -1,5 +1,6 @@
 import {isEscEvent} from './util.js';
 
+const COMMENT_QUANTITY = 5;
 const bigPicture = document.querySelector('.big-picture');
 const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
 const likesCount = bigPicture.querySelector('.likes-count');
@@ -32,7 +33,10 @@ const renderComments = (comments) => {
   }
   start += 5;
   if (start >= comments.length) {
+    socialCommentsCount.childNodes[0].textContent = `${comments.length} из `;
     commentsLoader.classList.add('hidden');
+  } else {
+    socialCommentsCount.childNodes[0].textContent = `${start} из `;
   }
 }
 
@@ -43,7 +47,7 @@ const renderBigPicture = (image) => {
   socialCaption.textContent = image.description;
   socialComments.innerHTML = '';
   start = 0;
-  if (image.comments.length > 5) {
+  if (image.comments.length > COMMENT_QUANTITY) {
     commentsLoader.classList.remove('hidden');
   }
   renderComments(image.comments);
@@ -53,7 +57,7 @@ const renderBigPicture = (image) => {
 }
 
 const openBigPicture = (image) => {
-  socialCommentsCount.classList.add('hidden');
+  socialCommentsCount.classList.remove('hidden');
   commentsLoader.classList.add('hidden');
   renderBigPicture(image);
   document.body.classList.add('modal-open');

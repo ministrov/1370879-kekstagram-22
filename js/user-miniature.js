@@ -1,4 +1,3 @@
-// Отрисовать фотографии других пользователей
 import openBigPicture from './render-big-picture.js';
 import {request} from './api.js';
 import {debounce, shuffleArray} from './util.js';
@@ -42,24 +41,7 @@ const removePhotos = () => {
     })
   }
 }
-/*
-const defaultFilter = (data) => {
-  document.querySelectorAll('.picture').forEach((item) => item.remove());
-  const fragment = document.createDocumentFragment();
-  data.forEach((item) => {
-    fragment.appendChild(renderUserImage(item));
-  });
-  userPictures.appendChild(fragment);
-}
 
-const discussedFilter = (data) => {
-  document.querySelectorAll('.picture').forEach((item) => item.remove());
-  const filtered = data.sort((item1, item2) => item2.comments.length - item1.comments.length);
-  const fragment = document.createDocumentFragment();
-  filtered.forEach((item) => fragment.appendChild(renderUserImage(item)));
-  userPictures.appendChild(fragment);
-}
-*/
 let photos = [];
 
 const filters = {
@@ -80,9 +62,7 @@ const onFilterFormClick = debounce((evt) => {
       filterForm.children[i].classList.remove('img-filters__button--active');
     }
     evt.target.classList.add('img-filters__button--active');
-    // убрать подсветку старой кнопки и поставить на новую
     removePhotos();
-
     renderPhotos(filters[evt.target.id]());
   }
 }, RERENDER_DELAY);
