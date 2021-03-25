@@ -1,3 +1,4 @@
+/*global noUiSlider:readonly*/
 import {hashTagInput} from './validate-form.js';
 import {isEscEvent} from './util.js';
 
@@ -57,7 +58,7 @@ uploadInput.addEventListener('change', (evt) => {
     editingForm.classList.remove('hidden');
     document.body.classList.add('modal-open');
     effectLevel.classList.add('hidden');
-    scale = 100;
+    scale = Size.MAX;
     reader.addEventListener('load', () => {
       uploadPreviewImg.src = reader.result;
       for (let i = 0; i < effectsPreview.length; i++) {
@@ -78,7 +79,7 @@ scaleControlBigger.addEventListener('click', () => {
   if (scale < Size.MAX) {
     scale += Size.MIN;
   }
-  uploadPreviewImg.style.transform = `scale(${scale / 100})`;
+  uploadPreviewImg.style.transform = `scale(${scale / Size.MAX})`;
   scaleControlInput.value = `${scale}%`;
 });
 
@@ -86,7 +87,7 @@ scaleControlSmaller.addEventListener('click', () => {
   if (scale > Size.MIN) {
     scale -= Size.MIN;
   }
-  uploadPreviewImg.style.transform = `scale(${scale / 100})`;
+  uploadPreviewImg.style.transform = `scale(${scale / Size.MAX})`;
   scaleControlInput.value = `${scale}%`;
 });
 
@@ -135,7 +136,7 @@ const onEffectRadioGroupClick = (evt) => {
 };
 
 effectRadioGroup.addEventListener('click', onEffectRadioGroupClick);
-/* eslint-disable-next-line no-undef */
+
 noUiSlider.create(effectLevelSlider, {
   range: {
     min: Slider.MIN,

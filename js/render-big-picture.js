@@ -27,11 +27,11 @@ let start = 0;
 
 const renderComments = (comments) => {
   let i = start;
-  while (i < start + 5 && i < comments.length) {
+  while (i < start + COMMENT_QUANTITY && i < comments.length) {
     socialComments.appendChild(renderComment(comments[i]));
     i++;
   }
-  start += 5;
+  start += COMMENT_QUANTITY;
   if (start >= comments.length) {
     socialCommentsCount.childNodes[0].textContent = `${comments.length} из `;
     commentsLoader.classList.add('hidden');
