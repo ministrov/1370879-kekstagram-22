@@ -1,6 +1,6 @@
 import openBigPicture from './render-big-picture.js';
 import {request} from './api.js';
-import {debounce, shuffleArray} from './util.js';
+import {getDebounce, shuffleArray} from './util.js';
 
 const RANDOM_PHOTO_QUANTITY = 10;
 const RERENDER_DELAY = 500;
@@ -56,7 +56,7 @@ const filters = {
   },
 }
 
-const onFilterFormClick = debounce((evt) => {
+const onFilterFormClick = getDebounce((evt) => {
   if (!evt.target.classList.contains('img-filters__button--active')) {
     for (let i = 0; i < filterForm.children.length; i++) {
       filterForm.children[i].classList.remove('img-filters__button--active');

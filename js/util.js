@@ -15,17 +15,17 @@ const isEscEvent = (evt) => {
   return evt.key === Keys.ESC || evt.key === Keys.ESCAPE;
 }
 
-const debounce = (cb, ms) => {
+const getDebounce = (cb, ms) => {
   let timeout;
   return (evt) => {
-    const fnCall = () => cb.apply(this, [evt])
+    const getFnCall = () => cb.apply(this, [evt])
     clearTimeout(timeout);
-    timeout = setTimeout(fnCall, ms);
+    timeout = setTimeout(getFnCall, ms);
   }
 }
 
 export {
   isEscEvent,
-  debounce,
+  getDebounce,
   shuffleArray
 }
