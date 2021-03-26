@@ -59,7 +59,7 @@ hashTagInput.addEventListener('input', () => {
     invalidMessages.push('Строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы');
   }
 
-  if (invalidMessage.length > 0) {
+  if (invalidMessages.length > 0) {
     hashTagInput.setCustomValidity(invalidMessages.join('. \n'));
     hashTagInput.style.border = '2px solid red';
   } else {

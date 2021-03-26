@@ -8,14 +8,18 @@ const successTemplate = document.querySelector('#success').content.querySelector
 const closeSuccesModalOnClick = (evt) => {
   if (evt.currentTarget) {
     const successSection = document.querySelector('.success');
-    successSection.remove();
+    if (successSection) {
+      successSection.remove();
+    }
   }
 }
 
 const closeSuccesModalOnEsc = (evt) => {
   if (isEscEvent(evt)) {
     const successSection = document.querySelector('.success');
-    successSection.remove();
+    if (successSection) {
+      successSection.remove();
+    }
     document.body.removeEventListener('keydown', closeSuccesModalOnEsc);
   }
 }
@@ -23,14 +27,18 @@ const closeSuccesModalOnEsc = (evt) => {
 const closeErrorModalOnClick = (evt) => {
   if (evt.currentTarget) {
     const errorSection = document.querySelector('.error');
-    errorSection.remove();
+    if (errorSection) {
+      errorSection.remove();
+    }
   }
 }
 
 const closeErrorModalOnEsc = (evt) => {
   if (isEscEvent(evt)) {
     const errorSection = document.querySelector('.error');
-    errorSection.remove();
+    if (errorSection) {
+      errorSection.remove();
+    }
     document.removeEventListener('keydown', closeErrorModalOnEsc);
   }
 }

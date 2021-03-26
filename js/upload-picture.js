@@ -58,7 +58,7 @@ uploadInput.addEventListener('change', (evt) => {
     editingForm.classList.remove('hidden');
     document.body.classList.add('modal-open');
     effectLevel.classList.add('hidden');
-    scale = Size.MAX;
+    scale = 100;
     reader.addEventListener('load', () => {
       uploadPreviewImg.src = reader.result;
       for (let i = 0; i < effectsPreview.length; i++) {
@@ -79,7 +79,7 @@ scaleControlBigger.addEventListener('click', () => {
   if (scale < Size.MAX) {
     scale += Size.MIN;
   }
-  uploadPreviewImg.style.transform = `scale(${scale / Size.MAX})`;
+  uploadPreviewImg.style.transform = `scale(${scale / 100})`;
   scaleControlInput.value = `${scale}%`;
 });
 
@@ -87,7 +87,7 @@ scaleControlSmaller.addEventListener('click', () => {
   if (scale > Size.MIN) {
     scale -= Size.MIN;
   }
-  uploadPreviewImg.style.transform = `scale(${scale / Size.MAX})`;
+  uploadPreviewImg.style.transform = `scale(${scale / 100})`;
   scaleControlInput.value = `${scale}%`;
 });
 
