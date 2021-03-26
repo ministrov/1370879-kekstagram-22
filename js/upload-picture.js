@@ -1,7 +1,7 @@
 import {hashTagInput} from './validate-form.js';
 import {isEscEvent} from './util.js';
 
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+const imagesTypes = ['gif', 'jpg', 'jpeg', 'png'];
 let scale = 100;
 const percent = '%';
 const pixel = 'px';
@@ -29,17 +29,17 @@ const uploadPreviewImg = editingForm.querySelector('.img-upload__preview').query
 const effectLevelValue = editingForm.querySelector('.effect-level__value');
 const effectsPreview = document.querySelectorAll('.effects__preview');
 
-const onCloseEditingFormClick = () => {
+const closeEditingFormOnClick = () => {
   editingForm.classList.add('hidden');
   document.body.classList.remove('modal-open');
   uploadInput.value = '';
   uploadPreviewImg.style.transform = 'scale(1)';
   uploadPreviewImg.style.filter = 'none';
   hashTagInput.style.border = 'none';
-  closeEditingForm.removeEventListener('click', onCloseEditingFormClick);
-  document.removeEventListener('keydown', onCloseEditingFormEscKeydown);
+  closeEditingForm.removeEventListener('click', closeEditingFormOnClick);
+  document.removeEventListener('keydown', closeEditingFormOnEsc);
 };
-const onCloseEditingFormEscKeydown = (evt) => {
+const closeEditingFormOnEsc = (evt) => {
   if (isEscEvent(evt) && !evt.target.classList.contains('text__hashtags') && !evt.target.classList.contains('text__description')) {
     evt.preventDefault();
     editingForm.classList.add('hidden');
@@ -49,7 +49,7 @@ const onCloseEditingFormEscKeydown = (evt) => {
 uploadInput.addEventListener('change', (evt) => {
   const file = uploadInput.files[0];
   const fileName = file.name.toLowerCase();
-  const matches = FILE_TYPES.some((it) => {
+  const matches = imagesTypes.some((it) => {
     return fileName.endsWith(it);
   })
   const reader = new FileReader();
@@ -67,8 +67,8 @@ uploadInput.addEventListener('change', (evt) => {
         effectsPreview[i].style.backgroundRepeat = 'no-repeat';
       }
     })
-    closeEditingForm.addEventListener('click', onCloseEditingFormClick);
-    document.addEventListener('keydown', onCloseEditingFormEscKeydown);
+    closeEditingForm.addEventListener('click', closeEditingFormOnClick);
+    document.addEventListener('keydown', closeEditingFormOnEsc);
   }
   reader.readAsDataURL(file);
 });
@@ -115,7 +115,7 @@ const effects = {
 };
 
 
-const onEffectRadioGroupClick = (evt) => {
+const clickOnEffectRadioGroup = (evt) => {
   if (evt.target.classList.contains('effects__preview')) {
     if (evt.target.classList.contains('effects__preview--none')) {
       effectLevel.classList.add('hidden');
@@ -134,7 +134,7 @@ const onEffectRadioGroupClick = (evt) => {
   }
 };
 
-effectRadioGroup.addEventListener('click', onEffectRadioGroupClick);
+effectRadioGroup.addEventListener('click', clickOnEffectRadioGroup);
 /* eslint-disable-next-line no-undef */
 noUiSlider.create(effectLevelSlider, {
   range: {

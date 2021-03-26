@@ -62,17 +62,17 @@ const openBigPicture = (image) => {
   renderBigPicture(image);
   document.body.classList.add('modal-open');
   bigPicture.classList.remove('hidden');
-  document.addEventListener('keydown', onEscBigPictureKeydown);
+  document.addEventListener('keydown', closeBigPictureOnEsc);
 }
 
 const closeBigPicture = () => {
   document.body.classList.remove('modal-open');
   bigPicture.classList.add('hidden');
   buttonClose.removeEventListener('click', closeBigPicture);
-  document.removeEventListener('keydown', onEscBigPictureKeydown);
+  document.removeEventListener('keydown', closeBigPictureOnEsc);
 }
 
-const onEscBigPictureKeydown = (evt) => {
+const closeBigPictureOnEsc = (evt) => {
   if (isEscEvent(evt)) {
     closeBigPicture();
   }
