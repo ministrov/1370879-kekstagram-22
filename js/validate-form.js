@@ -8,6 +8,9 @@ const regex = new RegExp(/[^a-zа-яё#]+/i);
 hashTagInput.addEventListener('input', () => {
   let invalidMessages = [];
   hashTagInput.setCustomValidity('');
+  if (hashTagInput.value === '') {
+    hashTagInput.style.border = null;
+  }
   let inputText = hashTagInput.value.toLowerCase().trim();
   if (!inputText) {
     return
@@ -58,7 +61,6 @@ hashTagInput.addEventListener('input', () => {
   if (isSpecialChars) {
     invalidMessages.push('Строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы');
   }
-  // console.log(invalidMessages);
   if (invalidMessages.length > 0) {
     hashTagInput.setCustomValidity(invalidMessages.join('. \n'));
     hashTagInput.style.border = '2px solid red';

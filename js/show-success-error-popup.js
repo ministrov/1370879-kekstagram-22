@@ -4,6 +4,7 @@ import {request} from './api.js';
 
 const imgUploadForm = document.querySelector('.img-upload__form');
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
+const uploadFile = document.querySelector('#upload-file');
 
 const closeSuccesModalOnClick = (evt) => {
   if (evt.currentTarget) {
@@ -55,6 +56,7 @@ const showSuccessPopup = () => {
   document.body.classList.remove('modal-open');
   successButton.addEventListener('click', closeSuccesModalOnClick);
   document.body.addEventListener('keydown', closeSuccesModalOnEsc);
+  uploadFile.value = '';
 }
 
 const showErrorPopup = () => {
@@ -71,6 +73,7 @@ const showErrorPopup = () => {
   errorButton.addEventListener('click', closeErrorModalOnClick);
   document.body.addEventListener('keydown', closeErrorModalOnEsc);
   errorDiv.addEventListener('blur', closeErrorModalOnClick);
+  uploadFile.value = '';
 }
 
 imgUploadForm.addEventListener('submit', (evt) => {

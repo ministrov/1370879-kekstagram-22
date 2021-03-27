@@ -15,14 +15,18 @@ const isEscEvent = (evt) => {
   return evt.key === Keys.ESC || evt.key === Keys.ESCAPE;
 }
 
-const getDebounce = (cb, ms) => {
-  let timeout;
-  return (evt) => {
-    const getFnCall = () => cb.apply(this, [evt])
-    clearTimeout(timeout);
-    timeout = setTimeout(getFnCall, ms);
-  }
-}
+const getDebounce = (cb, interval) => {
+  let lastTimeout = null;
+
+  return (...args) => {
+    if (lastTimeout) {
+      window.clearTimeout(lastTimeout);
+    }
+    lastTimeout = window.setTimeout(() => {
+      cb(...args);
+    }, interval);
+  };
+};
 
 export {
   isEscEvent,
