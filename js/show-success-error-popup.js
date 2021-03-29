@@ -1,5 +1,5 @@
 import {isEscEvent} from './util.js';
-import {editingForm} from './upload-picture.js';
+import {editingForm, closeEditingFormOnClick} from './upload-picture.js';
 import {request} from './api.js';
 
 const imgUploadForm = document.querySelector('.img-upload__form');
@@ -82,8 +82,10 @@ imgUploadForm.addEventListener('submit', (evt) => {
   request((response) => {
     if (response) {
       showSuccessPopup();
+      closeEditingFormOnClick();
     }
   }, () => {
     showErrorPopup();
+    closeEditingFormOnClick();
   }, 'POST', formData);
 });

@@ -3,7 +3,7 @@ const MAX_HASHTAG = 5;
 const MAX_COMMENTS = 140;
 const hashTagInput = document.querySelector('.text__hashtags');
 const descriptionText = document.querySelector('.text__description');
-const regex = new RegExp(/[^a-zа-яё#]+/i);
+const regex = new RegExp(/^[a-z0-9а-я#]+$/i);
 
 hashTagInput.addEventListener('input', () => {
   let invalidMessages = [];
@@ -55,10 +55,10 @@ hashTagInput.addEventListener('input', () => {
     invalidMessages.push ('Нельзя указать больше пяти хештегов');
   }
 
-  const isSpecialChars = inputArray.some((item) => {
+  const isNoSpecialChars = inputArray.every((item) => {
     return regex.test(item);
   });
-  if (isSpecialChars) {
+  if (!isNoSpecialChars) {
     invalidMessages.push('Строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы');
   }
   if (invalidMessages.length > 0) {
@@ -76,4 +76,4 @@ descriptionText.addEventListener('invalid', () => {
   }
 });
 
-export {hashTagInput};
+export {hashTagInput, descriptionText};

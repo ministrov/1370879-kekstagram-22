@@ -1,5 +1,5 @@
 /*global noUiSlider:readonly*/
-import {hashTagInput} from './validate-form.js';
+import {hashTagInput, descriptionText} from './validate-form.js';
 import {isEscEvent} from './util.js';
 
 const imagesTypes = ['gif', 'jpg', 'jpeg', 'png'];
@@ -29,6 +29,7 @@ const effectLevelSlider = editingForm.querySelector('.effect-level__slider');
 const uploadPreviewImg = editingForm.querySelector('.img-upload__preview').querySelector('img');
 const effectLevelValue = editingForm.querySelector('.effect-level__value');
 const effectsPreview = document.querySelectorAll('.effects__preview');
+const defaultEffect = editingForm.querySelector('#effect-none');
 
 const closeEditingFormOnClick = () => {
   editingForm.classList.add('hidden');
@@ -37,14 +38,20 @@ const closeEditingFormOnClick = () => {
   uploadPreviewImg.style.transform = 'scale(1)';
   uploadPreviewImg.style.filter = 'none';
   hashTagInput.style.border = 'none';
+  hashTagInput.value = '';
+  descriptionText.value = '';
+  effectLevelValue.value = Slider.MAX;
+  scale = 100;
+  scaleControlInput.value = `${scale}%`;
+  uploadPreviewImg.style.filter = effects['none']();
   closeEditingForm.removeEventListener('click', closeEditingFormOnClick);
+  defaultEffect.checked = true;
   document.removeEventListener('keydown', closeEditingFormOnEsc);
 };
 const closeEditingFormOnEsc = (evt) => {
   if (isEscEvent(evt) && !evt.target.classList.contains('text__hashtags') && !evt.target.classList.contains('text__description')) {
     evt.preventDefault();
-    editingForm.classList.add('hidden');
-    document.body.classList.remove('modal-open');
+    closeEditingFormOnClick();
   }
 };
 uploadInput.addEventListener('change', (evt) => {
@@ -153,6 +160,7 @@ effectLevelSlider.noUiSlider.on('change', () => {
 });
 
 export {
+  closeEditingFormOnClick,
   editingForm,
   uploadInput,
   uploadPreviewImg,
