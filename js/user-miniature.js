@@ -56,7 +56,7 @@ const filters = {
   },
 }
 
-const onFilterFormClick = getDebounce((evt) => {
+const clickOnFilterForm = getDebounce((evt) => {
   if (!evt.target.classList.contains('img-filters__button--active')) {
     for (let i = 0; i < filterForm.children.length; i++) {
       filterForm.children[i].classList.remove('img-filters__button--active');
@@ -72,7 +72,7 @@ const renderUserImages = () => {
     photos = data.slice();
     renderPhotos(photos)
     imgFilter.classList.remove('img-filters--inactive');
-    filterForm.addEventListener('click', onFilterFormClick);
+    filterForm.addEventListener('click', clickOnFilterForm);
   }, () => {
     const errorFetchTemplate = document.querySelector('#errorFetch').content;
     const errorFetchBlock = errorFetchTemplate.cloneNode(true);
