@@ -27,7 +27,7 @@
     "test": "eslint js/"
   },
   "staticFiles": {
-    "staticPath": "photos",
+    "staticPath": [".img", ".photos", ".nouislider"],
     "watcherGlob": "**"
   },
   "engines": {
